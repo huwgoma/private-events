@@ -1,5 +1,6 @@
 <li>
-    <%= event.name %>
-    <%= event.description %>
-    <%= event.format_date %>
+    <h3><%= event.name %></h3>
+    <p><%= event.format_date %></p>
+    <p><%= event.description %></p>
+    <%= link_to "Event Details", event %>
 </li>
