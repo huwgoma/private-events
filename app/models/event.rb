@@ -1,4 +1,4 @@
 class Event < ApplicationRecord
-  validates :name, :datetime, :location, presence: true 
+  validates :name, :datetime_of, :location, presence: true 
   belongs_to :host, class_name: "User"
 end

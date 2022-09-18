@@ -4,8 +4,8 @@
     <%= f.label :name, "Event Name:" %>
     <%= f.text_field :name %>
     <br>
-    <%= f.label :datetime, "Event Date/Time:" %>
-    <%= f.datetime_field :datetime, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P") %>
+    <%= f.label :datetime_of, "Event Date/Time:" %>
+    <%= f.datetime_field :datetime_of, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P") %>
     <br>
     <%= f.label :location, "Event Location:" %>
     <%= f.text_field :location %>
