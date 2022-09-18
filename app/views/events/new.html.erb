@@ -3,15 +3,28 @@
 <%= form_with model: @event do |f| %>
     <%= f.label :name, "Event Name:" %>
     <%= f.text_field :name %>
+    
     <br>
-    <%= f.label :datetime, "Event Date/Time:" %>
-    <%= f.datetime_field :datetime, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P") %>
+
+    <%= f.label :date_of, "Event Date:" %>
+    <%= f.date_field :date_of, min: DateTime.now.strftime("%Y-%m-%d") %>
+    
     <br>
+    
+    <%= f.label :time_of, "Event Time:" %>
+    <%= f.time_field :time_of, include_seconds: false %>
+    
+    <br>
+    
     <%= f.label :location, "Event Location:" %>
     <%= f.text_field :location %>
+    
     <br>
+    
     <%= f.label :description, "Description:" %>
     <%= f.text_area :description, size: "50x10" %>
+    
     <br>
+    
     <%= f.submit %>
 <% end %>
