@@ -1,10 +1,14 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  before_action :validate_attendance, only: [:create]
+  #before_action :validate_attendance, only: [:create]
 
   def create
-    current_user.attendances.build(event_id: params[:id]).save
-    flash[:notice] = "You are now attending this event."
+    @attendance = current_user.attendances.build(event_id: params[:id])
+    if @attendance.save
+      flash[:notice] = "You are now attending this event."
+    else
+      flash[:alert] = @attendance.errors
+    end
     redirect_to event_path(params[:id])
   end
 
