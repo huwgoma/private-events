@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: :show
   resources :events 
+  
+  get 'events/:id/attend', to: 'attendances#create', as: :attend
 end
