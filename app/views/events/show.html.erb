@@ -10,3 +10,10 @@
 <% end %>
 
 <p><%= link_to "Attend this Event", attend_path %></p>
+
+<p>Attending this Event:</p>
+<ul>
+    <% @event.attendees.each do |user| %>
+        <li><%= link_to user.name, user %></li>
+    <% end %>
+</ul>
