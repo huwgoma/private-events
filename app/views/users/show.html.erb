@@ -7,3 +7,10 @@
     <% end %>
 </ul>
 
+<h2>Attending Events:</h2>
+<ul>
+    <% @user.attending_events.each do |event| %>
+        <li><%= link_to event.name, event %></li>
+    <% end %>
+</ul>
+
