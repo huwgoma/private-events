@@ -1,9 +1,9 @@
 <h1><%= @user.name %></h1>
 
-<h2><%= @user.name %>'s Hosted Events: </h2>
+<h2>Hosted Events:</h2>
 <ul>
     <% @user.hosted_events.each do |event| %>
-        <li><%= event.name %></li>
+        <li><%= link_to event.name, event %></li>
     <% end %>
 </ul>
 

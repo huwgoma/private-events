@@ -1,5 +1,10 @@
 <h1><%= @event.name %></h1>
 <p>Created by <%= @event.host.name %></p>
+
 <p>Date/Time: <%= @event.format_datetime %></p>
+
 <p>Location: <%= @event.location %></p>
-<p>Description: <%= @event.description %></p>
+
+<% if @event.description.present? %>
+    <p>Description: <%= @event.description %></p>
+<% end %>
