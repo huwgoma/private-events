@@ -1,6 +1,9 @@
 class Event < ApplicationRecord
   validates :name, :datetime_of, :location, presence: true 
+  
   belongs_to :host, class_name: "User"
+  has_many :attendances
+  has_many :attendees, through: :attendances
 
   # Format Event Date/Times
   def format_date

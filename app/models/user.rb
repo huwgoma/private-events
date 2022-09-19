@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :hosted_events, class_name: "Event", foreign_key: "host_id"
+  has_many :attendances, foreign_key: :attendee_id
+  has_many :attending_events, through: :attendances, source: :event
 end
