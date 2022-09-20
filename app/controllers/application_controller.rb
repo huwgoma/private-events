@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :time_zone])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :time_zone])
   end
 
   def convert_time_zone(&block)
