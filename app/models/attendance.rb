@@ -9,7 +9,7 @@ class Attendance < ApplicationRecord
   private 
 
   def event_window_closed
-    if DateTime.now > event.datetime_of
+    if DateTime.now.after?(event.datetime_of)
       errors.add(:event, :already_happened, message: "This event has already happened!")
     end
   end

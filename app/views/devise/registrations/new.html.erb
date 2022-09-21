@@ -14,6 +14,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :time_zone, "Time Zone:" %><br />
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: "Eastern Time (US & Canada)" %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>

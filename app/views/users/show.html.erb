@@ -1,15 +1,27 @@
 <h1><%= @user.name %></h1>
 
-<h2>Hosted Events:</h2>
+<h2>Upcoming Hosted Events:</h2>
 <ul>
-    <% @user.hosted_events.each do |event| %>
+    <% @user.hosted_events.future.each do |event| %>
+        <li><%= link_to event.name, event %></li>
+    <% end %>
+</ul>
+<h3>Past Hosted Events:</h3>
+<ul>
+    <% @user.hosted_events.past.each do |event| %>
         <li><%= link_to event.name, event %></li>
     <% end %>
 </ul>
 
-<h2>Attending Events:</h2>
+<h2>Upcoming Attending Events:</h2>
 <ul>
-    <% @user.attending_events.each do |event| %>
+    <% @user.attending_events.future.each do |event| %>
+        <li><%= link_to event.name, event %></li>
+    <% end %>
+</ul>
+<h3>Past Events Attended:</h3>
+<ul>
+    <% @user.attending_events.past.each do |event| %>
         <li><%= link_to event.name, event %></li>
     <% end %>
 </ul>
