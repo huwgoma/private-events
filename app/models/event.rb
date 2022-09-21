@@ -1,9 +1,13 @@
 class Event < ApplicationRecord
+  include Attendable
+
   validates :name, :datetime_of, :location, presence: true 
   
   belongs_to :host, class_name: "User"
   has_many :attendances
   has_many :attendees, through: :attendances, source: :attendee
+
+  attr_accessor :current_user
 
   # Past/Future Events
   scope :past, -> { where("datetime_of < ?", DateTime.now) }
@@ -21,4 +25,5 @@ class Event < ApplicationRecord
   def format_datetime
     "#{format_date} at #{format_time}"
   end
+  
 end

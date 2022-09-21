@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  # Require User to be logged in to create an Attendance
   before_action :authenticate_user!, only: [:create]
 
   def create

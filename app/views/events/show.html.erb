@@ -9,7 +9,9 @@
     <p>Description: <%= @event.description %></p>
 <% end %>
 
-<p><%= link_to "Attend this Event", attend_path %></p>
+<% if @event.attendable? %>
+    <%= link_to "Attend this Event", attend_path %>
+<% end %>
 
 <p>Attending this Event:</p>
 <ul>
