@@ -5,6 +5,10 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :attendees, through: :attendances, source: :attendee
 
+  # Past/Future Events
+  scope :past, -> { where("datetime_of < ?", DateTime.now) }
+  scope :future, -> { where("datetime_of > ?", DateTime.now) }
+
   # Format Event Date/Times
   def format_date
     datetime_of.strftime("%B %d, %Y")
