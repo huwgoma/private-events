@@ -1,7 +1,7 @@
 <h1><%= @event.name %></h1>
 <p>Created by <%= @event.host.name %></p>
 
-<p>Date/Time: <%= @event.format_datetime %></p>
+<p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
 
 <p>Location: <%= @event.location %></p>
 
