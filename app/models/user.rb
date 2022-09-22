@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   validates :name, :time_zone, presence: true
 
-  has_many :hosted_events, class_name: "Event", foreign_key: "host_id"
-  has_many :attendances, foreign_key: :attendee_id
+  has_many :hosted_events, class_name: "Event", foreign_key: "host_id", dependent: :destroy
+  has_many :attendances, foreign_key: :attendee_id, dependent: :destroy
   has_many :attending_events, through: :attendances, source: :event
 end
