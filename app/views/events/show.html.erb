@@ -2,7 +2,7 @@
 
 <% if current_user == @event.host %>
     <%= link_to "Edit", edit_event_path %>
-    <%= %>
+    <%= button_to "Delete", @event, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete %>
 <% end %>
 
 <p>Created by <%= @event.host.name %></p>

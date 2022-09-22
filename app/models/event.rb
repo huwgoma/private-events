@@ -4,7 +4,7 @@ class Event < ApplicationRecord
   validates :name, :datetime_of, :location, presence: true 
   
   belongs_to :host, class_name: "User"
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :attendee
 
   attr_accessor :current_user

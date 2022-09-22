@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :authenticate_host_ownership, only: [:edit, :update]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_host_ownership, only: [:edit, :update, :destroy]
   
   def index
     @events = Event.all
@@ -37,6 +37,12 @@ class EventsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    Event.find(params[:id]).destroy
+    flash[:notice] = "Event successfully deleted."
+    redirect_to root_path
   end
 
   private 
