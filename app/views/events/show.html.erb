@@ -1,17 +1,18 @@
 <h1><%= @event.name %></h1>
+
+<% if current_user == @event.host %>
+    <%= link_to "Edit", edit_event_path %>
+    <%= %>
+<% end %>
+
 <p>Created by <%= @event.host.name %></p>
-
 <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
-
 <p>Location: <%= @event.location %></p>
-
 <% if @event.description.present? %>
     <p>Description: <%= @event.description %></p>
 <% end %>
 
-<% if @event.attendable? %>
-    <%= link_to "Attend this Event", attend_path %>
-<% end %>
+<%= link_to "Attend this Event", attend_path if @event.attendable? %>
 
 <p>Attending this Event:</p>
 <ul>

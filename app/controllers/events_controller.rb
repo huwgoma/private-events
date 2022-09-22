@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   
   def index
     @events = Event.all
@@ -24,9 +24,21 @@ class EventsController < ApplicationController
     @event.current_user = current_user
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+
+  end
+
   private 
 
   def event_params
     params.require(:event).permit([:name, :datetime_of, :location, :description])
+  end
+
+  def authenticate_ownership
+    
   end
 end
