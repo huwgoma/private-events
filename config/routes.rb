@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :events 
   
   get 'events/:id/attend', to: 'attendances#create', as: :attend
+  delete 'events/:id/attend', to: 'attendances#destroy', as: :cancel_attend
 end

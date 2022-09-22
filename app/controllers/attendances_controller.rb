@@ -12,4 +12,10 @@ class AttendancesController < ApplicationController
     end
     redirect_to event_path(params[:id])
   end
+
+  def destroy
+    current_user.attendances.find_by(event_id: params[:id]).destroy
+    flash[:notice] = "You are no longer attending this event."
+    redirect_to event_path
+  end
 end
