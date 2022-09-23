@@ -1,4 +1,4 @@
-# Namespace for methods that check if an Event is Attendable
+# Namespace for methods that check if an Event is Attendable by a given User
 module Attendable
   def attendable?
     current_user &&

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :users, only: :show
   resources :events 
   
+  # Attendances
   get 'events/:id/attend', to: 'attendances#create', as: :attend
   delete 'events/:id/attend', to: 'attendances#destroy', as: :cancel_attend
+
+  # Invites
+  #get 'events/:id/invites'
 end
