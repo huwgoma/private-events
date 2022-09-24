@@ -1,0 +1,11 @@
+<h1>Invite Users to <%= @event.name %></h1>
+
+<%= form_with url: event_invites_path do |f| %>
+    <%= f.collection_check_boxes(:user_ids, @invitable_users, :id, :name) do |b| %>
+        <li>
+            <%= b.check_box %>
+            <%= b.label %>
+        </li>
+    <% end %>
+    <%= f.submit "Invite Users" %>
+<% end %>
