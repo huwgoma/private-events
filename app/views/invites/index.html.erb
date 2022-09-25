@@ -9,3 +9,10 @@
     <% end %>
     <%= f.submit "Invite Users" %>
 <% end %>
+
+<h2>View Invites</h2>
+<ul>
+    <% @invites.each do |invite| %>
+        <li><%= invite.invitee.name %></li>
+    <% end %>
+</ul>
