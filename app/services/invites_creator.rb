@@ -3,14 +3,18 @@ class InvitesCreator
     @event_id = params[:event_id]
     @inviter_id = params[:inviter_id]
     @user_ids = params[:user_ids].reject(&:blank?)
+    @invites = { success: [], failure: [] }
   end
 
   def execute
     @user_ids.each do |uid|
-      Invite.create!(event_id: @event_id, inviter_id: @inviter_id, invitee_id: uid)
-    rescue ActiveRecord::RecordInvalid
-      return OpenStruct.new(success?: false)
+      invite = Invite.new(event_id: @event_id, inviter_id: @inviter_id, invitee_id: uid)
+      if invite.save 
+        @invites[:success] << invite
+      else
+        @invites[:failure] << invite
+      end
     end
-    OpenStruct.new(success?: true)
+    OpenStruct.new(successes: @invites[:success], failures: @invites[:failure])
   end
 end
