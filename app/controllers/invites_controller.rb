@@ -10,11 +10,11 @@ class InvitesController < ApplicationController
   def create
     invites = InvitesCreator.new(invite_params).execute
 
-    flash[:notice] = "#{invites.successes.count} invites successfully sent." if invites.successes.present?
+    flash[:notice] = "#{invites.successes.count} #{"invite".pluralize(invites.successes.count)} successfully sent." if invites.successes.present?
     
     if invites.failures.present?
-      flash[:alert] = "The following users could not be invited:"
-      flash[:failed_invite_names] = User.where(id: invites.failures.map(&:invitee_id)).pluck(:name)
+      flash[:alert] = "The following #{"user".pluralize(invites.failures.count)} could not be invited:"
+      flash[:invite_failures] = User.where(id: invites.failures.map(&:invitee_id)).pluck(:name)
     end
     redirect_to event_invites_path
   end
