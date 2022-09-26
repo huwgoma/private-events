@@ -14,7 +14,7 @@ class InvitesController < ApplicationController
     
     if invites.failures.present?
       flash[:alert] = "The following users could not be invited:"
-      flash[:invite_failures] = User.where(id: invites.failures.map(&:invitee_id)).pluck(:name)
+      flash[:failed_invite_names] = User.where(id: invites.failures.map(&:invitee_id)).pluck(:name)
     end
     redirect_to event_invites_path
   end
