@@ -8,13 +8,19 @@ class InvitesController < ApplicationController
   end
 
   def create
-    @event = Event.find(invite_params[:event_id])
-    InvitesCreator.new(invite_params).execute
+    invites = InvitesCreator.new(invite_params).execute
+
+    if invites.success?
+      flash[:notice] = "Invites successfully sent."
+    else 
+      flash[:alert] = "Invites could not be sent."
+    end
+    redirect_to event_invites_path
   end
 
   private
 
   def invite_params
-    params.require(:invite).permit(:event_id, user_ids:[]).merge(inviter_id: current_user.id)
+    params.require(:invite).permit(user_ids:[]).merge(inviter_id: current_user.id, event_id: params[:event_id])
   end
 end
