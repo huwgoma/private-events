@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     # Invites
     resources :invites, only: [:index, :create]
   end
-  # Delete Invites
+  # Revoke Invites
   delete 'events/:event_id/invites', to: 'invites#destroy'
   
   # Attendances

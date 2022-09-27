@@ -22,11 +22,10 @@ class InvitesController < ApplicationController
 
 
   def destroy
-    event = Event.find(params[:event_id])
-    uids = params[:invite][:user_ids].reject(&:blank?)
-
-    event.invites.where(invitee_id: uids).destroy_all
-    flash[:notice] = "#{"Invite".pluralize(uids.count)} successfully cancelled." unless uids.empty?
+    result = InvitesDestroyer.call(invite_params)
+    unless result.delete_count.zero?
+      flash[:notice] = "#{"Invite".pluralize(result.delete_count)} successfully cancelled."
+    end
     redirect_to event_invites_path
   end
 
