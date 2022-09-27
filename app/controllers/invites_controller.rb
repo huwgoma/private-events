@@ -2,9 +2,8 @@ class InvitesController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
     @invite = Invite.new
-    #@invitable_users = User.invitable_to(@event)
-    @invitable_users = User.all
-    @invites = @event.invites.includes(:invitee)
+    @invitable_users = User.invitable_to(@event)
+    @invitees = @event.invitees
   end
 
   def create
@@ -18,6 +17,16 @@ class InvitesController < ApplicationController
       # Array of usernames that could not be invited
       flash[:failed_invites] = User.find(invites.failures.map(&:invitee_id)).pluck(:name)
     end
+    redirect_to event_invites_path
+  end
+
+
+  def destroy
+    event = Event.find(params[:event_id])
+    uids = params[:invite][:user_ids].reject(&:blank?)
+
+    event.invites.where(invitee_id: uids).destroy_all
+    flash[:notice] = "#{"Invite".pluralize(uids.count)} successfully cancelled." unless uids.empty?
     redirect_to event_invites_path
   end
 

@@ -14,11 +14,14 @@ Rails.application.routes.draw do
     # Invites
     resources :invites, only: [:index, :create]
   end
+  # Delete Invites
+  delete 'events/:event_id/invites', to: 'invites#destroy'
   
   # Attendances
   get 'events/:id/attend', to: 'attendances#create', as: :attend
   delete 'events/:id/attend', to: 'attendances#destroy', as: :cancel_attend
 
   # Invites
-  #get 'events/:event_id/invites', to: 'invites#index', as: :event_invites
+  # get 'events/:event_id/invites', to: 'invites#index', as: :event_invites
+  # post 'events/:event_id/invites', to: 'invites#create'
 end

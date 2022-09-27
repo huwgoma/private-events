@@ -4,8 +4,13 @@
 <%= render "create_invites_form", invite: @invite, invitable_users: @invitable_users %>
 
 <h2>Revoke Invites</h2>
-<ul>
-    <% @invites.each do |invite| %>
-        <li><%= invite.invitee.name %></li>
+
+<%= form_with model: @invite, url: event_invites_path, method: :delete do |f| %>
+    <%= f.collection_check_boxes(:user_ids, @invitees, :id, :name) do |b| %>
+        <li>
+            <%= b.check_box %>
+            <%= b.label %>
+        </li>
     <% end %>
-</ul>
+    <%= f.submit "Revoke Invites" %>
+<% end %>
