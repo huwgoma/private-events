@@ -1,6 +1,7 @@
 class Invite < ApplicationRecord
   include ActiveModel::Validations 
 
+  # Associations
   belongs_to :inviter, class_name: "User"
   belongs_to :invitee, class_name: "User"
   belongs_to :event
@@ -8,6 +9,7 @@ class Invite < ApplicationRecord
   # For batch invites
   attr_accessor :user_ids
 
+  # Validations
   # Event must be upcoming
   validates_with EventUpcomingValidator
   # Inviter must be the event host
