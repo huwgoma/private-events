@@ -1,17 +1,18 @@
 class InvitesController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
-    @invite = current_user.sent_invites.new
+    @invite = Invite.new
     #@invitable_users = User.invitable_to(@event)
     @invitable_users = User.all
     @invites = Invite.includes(:invitee).where(event: @event)
   end
 
   def create
-    invites = InvitesCreator.new(invite_params).execute
+    invites = InvitesCreator.call(invite_params)
 
-    flash[:notice] = "#{invites.successes.count} #{"invite".pluralize(invites.successes.count)} successfully sent." if invites.successes.present?
-    
+    if invites.successes.present?
+      flash[:notice] = "#{invites.successes.count} #{"invite".pluralize(invites.successes.count)} successfully sent."
+    end
     if invites.failures.present?
       flash[:alert] = "The following #{"user".pluralize(invites.failures.count)} could not be invited:"
       flash[:invite_failures] = User.where(id: invites.failures.map(&:invitee_id)).pluck(:name)

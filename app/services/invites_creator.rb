@@ -6,6 +6,10 @@ class InvitesCreator
     @invites = { success: [], failure: [] }
   end
 
+  def self.call(*args, &block)
+    new(*args, &block).execute
+  end
+
   def execute
     @user_ids.each do |uid|
       invite = Invite.new(event_id: @event_id, inviter_id: @inviter_id, invitee_id: uid)
