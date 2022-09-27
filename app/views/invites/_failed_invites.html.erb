@@ -1,0 +1,7 @@
+<% if flash[:failed_invites] %>
+    <ul>
+        <% flash[:failed_invites].each do |name| %>
+            <li><%= name %></li>
+        <% end %>
+    </ul>
+<% end %>
