@@ -4,7 +4,7 @@ class InvitesController < ApplicationController
     @invite = Invite.new
     #@invitable_users = User.invitable_to(@event)
     @invitable_users = User.all
-    @invites = Invite.includes(:invitee).where(event: @event)
+    @invites = @event.invites.includes(:invitee)
   end
 
   def create
