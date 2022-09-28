@@ -20,7 +20,7 @@ class InvitesController < ApplicationController
     redirect_to event_invites_path
   end
 
-  def destroy
+  def revoke
     result = InvitesDestroyer.call(invite_params)
     unless result.delete_count.zero?
       flash[:notice] = "#{"Invite".pluralize(result.delete_count)} successfully cancelled."
