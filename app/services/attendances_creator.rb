@@ -4,6 +4,10 @@ class AttendancesCreator
     @event_id = event_id
   end
 
+  def self.call(*args, &block)
+    new(*args, &block).execute
+  end
+
   def execute
     attendance = Attendance.create!(attendee_id: @attendee_id, event_id: @event_id)
   rescue ActiveRecord::RecordInvalid => e
