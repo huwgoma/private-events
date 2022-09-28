@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   post 'events/:event_id/invites', to: 'invites#create'
   delete 'events/:event_id/invites', to: 'invites#destroy'
   # Accept/Decline Invite
-  #delete 'users/:user_id/invite', to: 'invites#decline', as: :decline_invite
+  post 'users/:user_id/invite/decline', to: 'invites#decline', as: :decline_invite
   
   # Attendances
   get 'events/:id/attend', to: 'attendances#create', as: :attend

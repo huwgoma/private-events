@@ -33,6 +33,12 @@ class InvitesController < ApplicationController
     @received_invites = user.received_invites.includes(:event, :inviter)
   end
 
+  def decline
+    InvitesDestroyer.call(params)
+    flash[:notice] = "Invite declined."
+    redirect_to user_invites_path
+  end
+
   private
 
   def invite_params

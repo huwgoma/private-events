@@ -1,7 +1,8 @@
 class InvitesDestroyer
   def initialize(params)
     @event_id = params[:event_id]
-    @user_ids = params[:user_ids].reject(&:blank?)
+    # Handle both a collection of user_ids or a single user_id
+    @user_ids = params[:user_ids]&.reject(&:blank?) || params[:user_id]
   end
 
   def self.call(*args, &block)

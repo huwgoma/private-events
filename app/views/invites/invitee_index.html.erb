@@ -7,7 +7,7 @@
             <%= "from #{invite.inviter.name}" %>
             <br>
             <%= button_to "Accept" %>
-            <%# button_to "Decline", params: { event_id: invite.event.id } %>
+            <%= button_to "Decline", decline_invite_path, params: { event_id: invite.event.id } %>
         </li>
     <% end %>
 </ul>
