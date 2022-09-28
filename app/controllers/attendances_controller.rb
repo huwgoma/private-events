@@ -3,8 +3,8 @@ class AttendancesController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    @attendance = current_user.attendances.build(event_id: params[:id])
-    if @attendance.save
+    @attendance = AttendancesCreator.new(attendee_id: current_user.id, event_id: params[:id]).execute
+    if @attendance.success?
       flash[:notice] = "You are now attending this event."
     else
       # Surely you can do this better?
