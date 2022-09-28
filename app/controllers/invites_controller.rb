@@ -1,5 +1,5 @@
 class InvitesController < ApplicationController
-  def index
+  def inviter_index
     @event = Event.find(params[:event_id])
     @invite = Invite.new
     @invitable_users = User.invitable_to(@event)
@@ -20,13 +20,17 @@ class InvitesController < ApplicationController
     redirect_to event_invites_path
   end
 
-
   def destroy
     result = InvitesDestroyer.call(invite_params)
     unless result.delete_count.zero?
       flash[:notice] = "#{"Invite".pluralize(result.delete_count)} successfully cancelled."
     end
     redirect_to event_invites_path
+  end
+
+  def invitee_index
+    user = User.find(params[:user_id])
+    @received_invites = user.received_invites.includes(:event, :inviter)
   end
 
   private

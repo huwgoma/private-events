@@ -1,0 +1,13 @@
+<h1>View your Invites:</h1>
+
+<ul>
+    <% @received_invites.each do |invite| %>
+        <li>
+            <%= invite.event.name %>
+            <%= "from #{invite.inviter.name}" %>
+            <br>
+            <%= button_to "Accept" %>
+            <%# button_to "Decline", params: { event_id: invite.event.id } %>
+        </li>
+    <% end %>
+</ul>
