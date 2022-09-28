@@ -35,7 +35,9 @@ class InvitesController < ApplicationController
 
   def accept
     InvitesDestroyer.call(params)
-
+    AttendancesCreator.new(attendee_id: params[:user_id], event_id: params[:event_id]).execute
+    flash[:notice] = "You are now attending this event."
+    redirect_to user_invites_path
   end
 
   def decline
