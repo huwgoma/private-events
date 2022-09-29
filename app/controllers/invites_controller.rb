@@ -1,7 +1,7 @@
 class InvitesController < ApplicationController
   #before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
   #before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
-  before_action :authenticate_user!, only: [:index, :accept]
+  before_action :authenticate_user!, only: [:index, :accept, :decline]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -16,7 +16,11 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
-
+  def decline
+    InvitesDestroyer.call(params[:id])
+    flash[:notice] = "Invite declined."
+    redirect_to invites_path
+  end
 
 
 
@@ -52,17 +56,8 @@ class InvitesController < ApplicationController
     end
     redirect_to event_invites_path
   end
-  
 
-  # Only allow if the current user's id matches the invitee id  
-  
 
-  # Only allow if the current user's id matches the invitee id  
-  def decline
-    InvitesDestroyer.call(params)
-    flash[:notice] = "Invite declined."
-    redirect_to user_invites_path
-  end
 
   private
 

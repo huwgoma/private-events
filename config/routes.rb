@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :invites, only: :index do
     member do
       post 'accept' # POST invites/:id/accept
+      post 'decline' # POST invites/:id/decline
     end
   end
 
