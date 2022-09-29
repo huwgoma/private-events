@@ -1,13 +1,26 @@
 class InvitesController < ApplicationController
   #before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
   #before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, only: [:index, :accept]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
     @received_invites = current_user.received_invites.includes(:event, :inviter)
   end
   
+  def accept
+    invite = Invite.find(params[:id])
+    AttendancesCreator.call(attendee_id: current_user.id, event_id: invite.event_id)
+    InvitesDestroyer.call(params[:id])
+    flash[:notice] = "You are now attending this event."
+    redirect_to invites_path
+  end
+
+
+
+
+
+
   # Only allow if the current user is the host of the event
   def inviter_index
     @event = Event.find(params[:event_id])
@@ -42,12 +55,7 @@ class InvitesController < ApplicationController
   
 
   # Only allow if the current user's id matches the invitee id  
-  def accept
-    #InvitesDestroyer.call(params)
-    #AttendancesCreator.call(attendee_id: params[:user_id], event_id: params[:event_id])
-    flash[:notice] = "You are now attending this event."
-    redirect_to invites_path
-  end
+  
 
   # Only allow if the current user's id matches the invitee id  
   def decline
