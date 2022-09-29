@@ -20,8 +20,6 @@
     <% end %>
 </ul>
 
-<%= link_to "My Invites", user_invites_path(@user) if current_user == @user %>
-
 <h3>Past Events Attended:</h3>
 <ul>
     <% @user.attending_events.past.each do |event| %>
