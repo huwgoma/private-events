@@ -1,8 +1,7 @@
 class InvitesDestroyer
-  def initialize(params)
-    @event_id = params[:event_id]
-    # Handle both a collection of user_ids or a single user_id
-    @user_ids = params[:user_ids]&.reject(&:blank?) || params[:user_id]
+  def initialize(invite_ids)
+    # If given an Array - Strip the blank values; otherwise, just take the value as-is
+    @invite_ids = invite_ids.respond_to?(:reject) ? invite_ids.reject(&:blank?) : invite_ids
   end
 
   def self.call(*args, &block)
@@ -10,8 +9,7 @@ class InvitesDestroyer
   end
   
   def execute
-    event = Event.find(@event_id)
-    invites = event.invites.where(invitee_id: @user_ids).destroy_all
+    invites = Invite.where(id: @invite_ids).destroy_all
     OpenStruct.new(delete_count: invites.count)
   end
 end
