@@ -15,15 +15,22 @@ Rails.application.routes.draw do
   # Events
   resources :events 
 
+  # Invites Refactor
+  resources :invites, only: :index do
+    member do
+      post 'accept' # POST invites/:id/accept
+    end
+  end
+
   # Manage Invites - Inviter/Invitee
   get 'events/:event_id/invites', to: 'invites#inviter_index', as: :event_invites
-  get 'users/:user_id/invites', to: 'invites#invitee_index', as: :user_invites
+  #get 'users/:user_id/invites', to: 'invites#invitee_index', as: :user_invites
   # Create/Revoke Invites
   post 'events/:event_id/invites', to: 'invites#create'
   delete 'events/:event_id/invites', to: 'invites#revoke'
   # Accept/Decline Invite
-  post 'users/:user_id/invites/accept', to: 'invites#accept', as: :accept_invite
-  post 'users/:user_id/invites/decline', to: 'invites#decline', as: :decline_invite
+  #post 'users/:user_id/invites/:id/accept', to: 'invites#accept', as: :accept_invite
+  #post 'users/:user_id/invites/decline', to: 'invites#decline', as: :decline_invite
   
   # Attendances
   get 'events/:id/attend', to: 'attendances#create', as: :attend

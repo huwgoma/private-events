@@ -1,7 +1,13 @@
 class InvitesController < ApplicationController
-  before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
-  before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
+  #before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
+  #before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
+  before_action :authenticate_user!, only: :index
 
+  # Invitee Actions - Permit only if the current user is logged in
+  def index
+    @received_invites = current_user.received_invites.includes(:event, :inviter)
+  end
+  
   # Only allow if the current user is the host of the event
   def inviter_index
     @event = Event.find(params[:event_id])
@@ -33,19 +39,14 @@ class InvitesController < ApplicationController
     end
     redirect_to event_invites_path
   end
-
-  # Only allow if the current user matches the user
-  def invitee_index
-    user = User.find(params[:user_id])
-    @received_invites = user.received_invites.includes(:event, :inviter)
-  end
+  
 
   # Only allow if the current user's id matches the invitee id  
   def accept
-    InvitesDestroyer.call(params)
-    AttendancesCreator.call(attendee_id: params[:user_id], event_id: params[:event_id])
+    #InvitesDestroyer.call(params)
+    #AttendancesCreator.call(attendee_id: params[:user_id], event_id: params[:event_id])
     flash[:notice] = "You are now attending this event."
-    redirect_to user_invites_path
+    redirect_to invites_path
   end
 
   # Only allow if the current user's id matches the invitee id  
@@ -68,10 +69,10 @@ class InvitesController < ApplicationController
     redirect_to event_path(params[:event_id])
   end
 
-  def authenticate_invitee
-    unless current_user == User.find(params[:user_id])
-      flash[:alert] = "You do not have permission to view this user's invites!"
-      redirect_to user_path(params[:user_id])
-    end
-  end
+  # def authenticate_invitee
+  #   unless current_user == User.find(params[:user_id])
+  #     flash[:alert] = "You do not have permission to view this user's invites!"
+  #     redirect_to user_path(params[:user_id])
+  #   end
+  # end
 end
