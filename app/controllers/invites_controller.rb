@@ -22,11 +22,8 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
-
-
-
-  # Only allow if the current user is the host of the event
-  def inviter_index
+  # Inviter Actions - Permit only if the current user is the host of the event
+  def manage
     @event = Event.find(params[:event_id])
     @invite = Invite.new
     @invitable_users = User.invitable_to(@event)
