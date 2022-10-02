@@ -7,6 +7,9 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :attendees, through: :attendances, source: :attendee
 
+  has_many :invites, dependent: :destroy
+  has_many :invitees, through: :invites
+
   attr_accessor :current_user
 
   # Past/Future Events

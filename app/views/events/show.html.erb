@@ -14,6 +14,8 @@
 
 <%= link_to "Attend this Event", attend_path if @event.attendable? %>
 
+<%= link_to "Manage Invites", event_invites_path(@event) if current_user == @event.host %>
+
 <p>Attending this Event:</p>
 <ul>
     <% @event.attendees.each do |user| %>

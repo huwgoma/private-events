@@ -1,17 +1,17 @@
-# Namespace for methods that check if an Event is Attendable
+# Namespace for methods that check if an Event is Attendable by a given User
 module Attendable
   def attendable?
     current_user &&
-      event_upcoming? &&
-      user_not_already_attending? &&
+      upcoming? &&
+      user_not_attending? &&
       user_not_host?
   end
 
-  def event_upcoming?
+  def upcoming?
     DateTime.now.before?(datetime_of)
   end
 
-  def user_not_already_attending?
+  def user_not_attending?
     attendees.exclude?(current_user)
   end
 

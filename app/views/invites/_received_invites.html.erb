@@ -1,0 +1,11 @@
+<ul>
+    <% @received_invites.each do |invite| %>
+        <li>
+            <%= invite.event.name %>
+            <%= "from #{invite.inviter.name}" %>
+            <br>
+            <%= button_to "Accept", accept_invite_path(invite) %>
+            <%= button_to "Decline", decline_invite_path(invite) %>
+        </li>
+    <% end %>
+</ul>

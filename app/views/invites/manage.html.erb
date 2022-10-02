@@ -1,0 +1,7 @@
+<%= render "failed_invites" %>
+
+<h1>Invite Users to <%= @event.name %></h1>
+<%= render "create_invites_form", invite: @invite, invitable_users: @invitable_users %>
+
+<h2>Revoke Invites</h2>
+<%= render "revoke_invites_form", invite: @invite, invitees: @invitees %>

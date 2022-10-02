@@ -19,6 +19,7 @@
         <%= render "event_link", event: event %>
     <% end %>
 </ul>
+
 <h3>Past Events Attended:</h3>
 <ul>
     <% @user.attending_events.past.each do |event| %>

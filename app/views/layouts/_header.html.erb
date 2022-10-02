@@ -7,6 +7,7 @@
         <% if user_signed_in? %>
             <li><%= link_to "Create an Event", new_event_path %></li>
             <li><%= link_to "My Events", current_user %></li>
+            <li><%= link_to "My Invites (#{current_user.received_invites.count})", invites_path %></li>
             <li><%= link_to current_user.name, edit_user_registration_path %></li>
             <li><%= button_to "Log Out", destroy_user_session_path, method: :delete %></li>
         <% else %>

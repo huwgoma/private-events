@@ -1,0 +1,9 @@
+<%= form_with url: event_invites_path, method: :delete do |f| %>
+    <%= f.collection_check_boxes(:invite_ids, @invites, :id, Proc.new {|i| i.invitee.name }) do |b| %>
+        <li>
+            <%= b.check_box %>
+            <%= b.label %>
+        </li>
+    <% end %>
+    <%= f.submit "Revoke Invites" %>
+<% end %>
