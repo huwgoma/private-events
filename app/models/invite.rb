@@ -7,7 +7,7 @@ class Invite < ApplicationRecord
   belongs_to :event
 
   # For batch invites
-  attr_accessor :user_ids
+  attr_accessor :user_ids, :invite_ids
 
   # Validations
   # Event must be upcoming

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :invites, only: :create do
       collection do
         get '', to: 'invites#manage' # GET events/:event_id/invites
+        delete '', to: 'invites#revoke' # DELETE events/:event_id/invites
       end
     end
   end
@@ -29,12 +30,6 @@ Rails.application.routes.draw do
       post 'decline' # POST invites/:id/decline
     end
   end
-
-  # Manage Invites - Inviter/Invitee
-  #get 'events/:event_id/invites', to: 'invites#inviter_index', as: :event_invites
-  # Create/Revoke Invites
-  #post 'events/:event_id/invites', to: 'invites#create'
-  #delete 'events/:event_id/invites', to: 'invites#revoke'
   
   # Attendances
   get 'events/:id/attend', to: 'attendances#create', as: :attend

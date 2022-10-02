@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :accept, :decline, :manage]
-  before_action :authenticate_host_ownership, only: [:manage, :create]
+  before_action :authenticate_user!
+  before_action :authenticate_host_ownership, only: [:manage, :create, :revoke]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -21,12 +21,12 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
-  # Inviter Actions - Permit only if the current user is the host of the event
+  # Inviter Actions - Permit only if the current (logged in) user is the host of the event
   def manage
     @event = Event.find(params[:event_id])
     @invite = Invite.new
     @invitable_users = User.invitable_to(@event)
-    @invitees = @event.invitees
+    @invites = @event.invites.includes(:invitee)
   end
 
   def create
@@ -43,17 +43,13 @@ class InvitesController < ApplicationController
     redirect_to event_invites_path
   end
 
-
-  # Only allow if the current user is the host of the event
   def revoke
-    result = InvitesDestroyer.call(invite_params)
+    result = InvitesDestroyer.call(params[:invite_ids])
     unless result.delete_count.zero?
       flash[:notice] = "#{"Invite".pluralize(result.delete_count)} successfully cancelled."
     end
     redirect_to event_invites_path
   end
-
-
 
   private
 
