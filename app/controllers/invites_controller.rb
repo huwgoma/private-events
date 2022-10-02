@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :accept, :decline, :manage]
-  before_action :authenticate_host_ownership, only: [:manage]
+  before_action :authenticate_host_ownership, only: [:manage, :create]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -29,10 +29,6 @@ class InvitesController < ApplicationController
     @invitees = @event.invitees
   end
 
-
-
-
-  # Only allow if the current user is the host of the event
   def create
     invites = InvitesCreator.call(invite_params)
 
@@ -42,10 +38,11 @@ class InvitesController < ApplicationController
     if invites.failures.present?
       flash[:alert] = "The following #{"user".pluralize(invites.failures.count)} could not be invited:"
       # Array of usernames that could not be invited
-      flash[:failed_invites] = User.find(invites.failures.map(&:invitee_id)).pluck(:name)
+      flash[:failed_invites] = invites.failed_users
     end
     redirect_to event_invites_path
   end
+
 
   # Only allow if the current user is the host of the event
   def revoke
