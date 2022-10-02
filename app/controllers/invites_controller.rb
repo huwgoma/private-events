@@ -1,7 +1,6 @@
 class InvitesController < ApplicationController
-  #before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
-  #before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
-  before_action :authenticate_user!, only: [:index, :accept, :decline]
+  before_action :authenticate_user!, only: [:index, :accept, :decline, :manage]
+  before_action :authenticate_host_ownership, only: [:manage]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -29,6 +28,9 @@ class InvitesController < ApplicationController
     @invitable_users = User.invitable_to(@event)
     @invitees = @event.invitees
   end
+
+
+
 
   # Only allow if the current user is the host of the event
   def create
@@ -65,14 +67,7 @@ class InvitesController < ApplicationController
   def authenticate_host_ownership
     current_user.hosted_events.find(params[:event_id])
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "You do not have permission to manage invites for this event!"
+    flash[:alert] = "You do not have permission to #{action_name} invites for this event!"
     redirect_to event_path(params[:event_id])
   end
-
-  # def authenticate_invitee
-  #   unless current_user == User.find(params[:user_id])
-  #     flash[:alert] = "You do not have permission to view this user's invites!"
-  #     redirect_to user_path(params[:user_id])
-  #   end
-  # end
 end
