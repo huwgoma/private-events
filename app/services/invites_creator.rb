@@ -3,7 +3,7 @@ class InvitesCreator
     @event_id = params[:event_id]
     @inviter_id = params[:inviter_id]
     @user_ids = params[:user_ids].reject(&:blank?)
-    @invites = { success: [], failure: [] }
+    @result = { success: [], failure: [] }
   end
 
   def self.call(*args, &block)
@@ -14,11 +14,11 @@ class InvitesCreator
     @user_ids.each do |uid|
       invite = Invite.new(event_id: @event_id, inviter_id: @inviter_id, invitee_id: uid)
       if invite.save 
-        @invites[:success] << invite
+        @result[:success] << invite
       else
-        @invites[:failure] << invite
+        @result[:failure] << invite
       end
     end
-    OpenStruct.new(successes: @invites[:success], failures: @invites[:failure])
+    OpenStruct.new(successes: @result[:success], failures: @result[:failure], failed_users: User.find(@result[:failure].map(&:invitee_id)).pluck(:name))
   end
 end

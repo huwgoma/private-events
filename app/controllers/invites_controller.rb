@@ -1,7 +1,6 @@
 class InvitesController < ApplicationController
-  #before_action :authenticate_host_ownership, only: [:inviter_index, :create, :revoke]
-  #before_action :authenticate_invitee, only: [:invitee_index, :accept, :decline]
-  before_action :authenticate_user!, only: [:index, :accept, :decline]
+  before_action :authenticate_user!
+  before_action :authenticate_host_ownership, only: [:manage, :create, :revoke]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -22,18 +21,14 @@ class InvitesController < ApplicationController
     redirect_to invites_path
   end
 
-
-
-
-  # Only allow if the current user is the host of the event
-  def inviter_index
+  # Inviter Actions - Permit only if the current (logged in) user is the host of the event
+  def manage
     @event = Event.find(params[:event_id])
     @invite = Invite.new
     @invitable_users = User.invitable_to(@event)
-    @invitees = @event.invitees
+    @invites = @event.invites.includes(:invitee)
   end
 
-  # Only allow if the current user is the host of the event
   def create
     invites = InvitesCreator.call(invite_params)
 
@@ -43,21 +38,18 @@ class InvitesController < ApplicationController
     if invites.failures.present?
       flash[:alert] = "The following #{"user".pluralize(invites.failures.count)} could not be invited:"
       # Array of usernames that could not be invited
-      flash[:failed_invites] = User.find(invites.failures.map(&:invitee_id)).pluck(:name)
+      flash[:failed_invites] = invites.failed_users
     end
     redirect_to event_invites_path
   end
 
-  # Only allow if the current user is the host of the event
   def revoke
-    result = InvitesDestroyer.call(invite_params)
+    result = InvitesDestroyer.call(params[:invite_ids])
     unless result.delete_count.zero?
       flash[:notice] = "#{"Invite".pluralize(result.delete_count)} successfully cancelled."
     end
     redirect_to event_invites_path
   end
-
-
 
   private
 
@@ -68,14 +60,7 @@ class InvitesController < ApplicationController
   def authenticate_host_ownership
     current_user.hosted_events.find(params[:event_id])
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "You do not have permission to manage invites for this event!"
+    flash[:alert] = "You do not have permission to #{action_name} invites for this event!"
     redirect_to event_path(params[:event_id])
   end
-
-  # def authenticate_invitee
-  #   unless current_user == User.find(params[:user_id])
-  #     flash[:alert] = "You do not have permission to view this user's invites!"
-  #     redirect_to user_path(params[:user_id])
-  #   end
-  # end
 end
