@@ -14,5 +14,5 @@ class Attendance < ApplicationRecord
   # If creating an Attendance to a Private Event - The attendee must be on the Event's list of invitees
   validates :attendee_id, inclusion: { in: Proc.new { |a| a.event.invitee_ids }, 
     if: Proc.new { |a| a.event.is_private? }, 
-    message: "You do not have an invite to this event!" }
+    message: "This event is private - you do not have an invite!" }
 end
