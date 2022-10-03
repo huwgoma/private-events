@@ -12,13 +12,13 @@ class InvitesController < ApplicationController
     AttendancesCreator.call(attendee_id: current_user.id, event_id: invite.event_id)
     InvitesDestroyer.call(params[:id])
     flash[:notice] = "You are now attending this event."
-    redirect_to invites_path
+    redirect_back(fallback_location: invites_path)
   end
 
   def decline
     InvitesDestroyer.call(params[:id])
     flash[:notice] = "Invite declined."
-    redirect_to invites_path
+    redirect_back(fallback_location: invites_path)
   end
 
   # Inviter Actions - Permit only if the current (logged in) user is the host of the event
