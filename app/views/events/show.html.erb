@@ -12,7 +12,6 @@
     <p>Description: <%= @event.description %></p>
 <% end %>
 
-<%# link_to "Attend this Event", attend_path if @event.attendable? %>
 <%= render "event_attend", event: @event, invite: @invite %>
 
 <%= link_to "Manage Invites", event_invites_path(@event) if current_user == @event.host %>

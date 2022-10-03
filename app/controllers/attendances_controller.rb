@@ -8,7 +8,6 @@ class AttendancesController < ApplicationController
     if @attendance.success?
       flash[:notice] = "You are now attending this event."
     else
-      # Surely you can do this better?
       flash[:alert] = @attendance.errors.messages.values.flatten.first
     end
     redirect_to event_path

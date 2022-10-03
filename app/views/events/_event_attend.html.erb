@@ -1,6 +1,9 @@
 <!-- If EventsController is able to find an invite to this event for the current user-->
 <% if invite %>
-    <%= "#{invite.inviter.name} has invited you to this event!" %>
-    <br>
+    <p><%= "#{invite.inviter.name} has invited you to this event!" %></p>
     <%= render "invites/invite_accept_decline", invite: invite %>
+<% elsif event.is_private? %>
+    <p>This event is private.</p>
+<% elsif event.attendable? %>
+    <%= link_to "Attend this Event", attend_path %>
 <% end %>
