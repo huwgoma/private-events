@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   private 
 
   def event_params
-    params.require(:event).permit([:name, :datetime_of, :location, :description])
+    params.require(:event).permit([:name, :datetime_of, :location, :is_private, :description])
   end
 
   def authenticate_host_ownership

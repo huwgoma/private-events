@@ -15,6 +15,11 @@
     </div>
 
     <div>
+        <%= f.check_box :is_private %>
+        <%= f.label :is_private, "Make this event private?" %>
+    </div>
+
+    <div>
         <%= f.label :description, "Description:" %>
         <%= f.text_area :description, size: "50x10" %>
     </div>
