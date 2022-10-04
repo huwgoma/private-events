@@ -1,4 +1,7 @@
-<h1>Upcoming Events</h1>
+<div class="flex justify-between items-center">
+    <h1>Upcoming Events</h1>
+    <%= link_to "Create an Event", new_event_path %>
+</div>
 <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
     <%= render @events.future %>
 </ul>

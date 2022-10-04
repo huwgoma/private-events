@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PrivateEvents</title>
+    <title>Private Events</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,7 +11,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="w-full">
+  <body class="w-full bg-gray-800 text-white">
     <%= render "layouts/header" %>
 
     <div class="container">
@@ -21,7 +21,7 @@
       <% if alert %>
         <div><%= alert %></div>
       <% end %>
-      
+
       <%= yield %>
     </div>
   </body>
