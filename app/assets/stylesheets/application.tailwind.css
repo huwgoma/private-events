@@ -27,8 +27,16 @@
 }
 
 @layer components {
+  /* Navbar */
   .navbar {
-   
+    @apply bg-light-gray text-lg font-medium p-2 
+  }
+  .navbar a,
+  .navbar button {
+    @apply inline-block hover:scale-105;
+  }
+  .navbar li {
+    @apply pl-3;
   }
 
   .container {

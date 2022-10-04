@@ -1,8 +1,6 @@
-<nav class="bg-light-gray p-2 text-lg">
+<nav class="navbar">
     <div class="container flex justify-between">
-        <ul>
-            <li><%= link_to "Home", root_path %></li>
-        </ul>
+        <%= link_to "Home", root_path %>
         <ul class="flex">
             <% if user_signed_in? %>
                 <li><%= link_to "My Events", current_user %></li>
