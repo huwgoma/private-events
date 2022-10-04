@@ -8,6 +8,9 @@
     --dark-gray: #1F2937; /* gray-800 */
     --white: #ffffff; 
   }
+  html, body {
+    @apply h-full m-0
+  }
 
   h1 {
     @apply text-3xl font-semibold;
