@@ -11,15 +11,18 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="w-full">
     <%= render "layouts/header" %>
-    <% if notice %>
-      <div><%= notice %></div>
-    <% end %>
-    <% if alert %>
-      <div><%= alert %></div>
-    <% end %>
 
-    <%= yield %>
+    <div class="container">
+      <% if notice %>
+        <div><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div><%= alert %></div>
+      <% end %>
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
