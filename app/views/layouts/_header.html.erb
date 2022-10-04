@@ -1,11 +1,10 @@
-<nav class="bg-gray-500 p-2 text-lg">
+<nav class="bg-light-gray p-2 text-lg">
     <div class="container flex justify-between">
         <ul>
             <li><%= link_to "Home", root_path %></li>
         </ul>
         <ul class="flex">
             <% if user_signed_in? %>
-                
                 <li><%= link_to "My Events", current_user %></li>
                 <li><%= link_to "My Invites (#{current_user.received_invites.count})", invites_path %></li>
                 <li><%= link_to current_user.name, edit_user_registration_path %></li>

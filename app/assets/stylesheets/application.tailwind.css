@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --light-gray: #4B5563; /* gray-600 */
+    --dark-gray: #1F2937; /* gray-800 */
+    --white: #ffffff; 
+  }
+
   h1 {
     @apply text-3xl font-semibold;
   }
