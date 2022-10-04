@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :users
   
   devise_scope :user do 
     get "users", to: "devise/sessions#new"
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  
   # Defines the root path route ("/")
   root "events#index"
 
@@ -21,6 +21,11 @@ Rails.application.routes.draw do
         delete '', to: 'invites#revoke' # DELETE events/:event_id/invites
       end
     end
+
+    # Attendances
+    resources :attendances, only: :create do
+      delete '', to: 'attendances#destroy', on: :collection # DELETE events/:event_id/attendances
+    end
   end
 
   # Invites - Invitees
@@ -30,8 +35,4 @@ Rails.application.routes.draw do
       post 'decline' # POST invites/:id/decline
     end
   end
-  
-  # Attendances
-  get 'events/:id/attend', to: 'attendances#create', as: :attend
-  delete 'events/:id/attend', to: 'attendances#destroy', as: :cancel_attend
 end

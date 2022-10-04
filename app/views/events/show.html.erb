@@ -24,5 +24,5 @@
 </ul>
 
 <% if @event.attendees.include?(current_user) %>
-    <%= button_to "Cancel Attendance", cancel_attend_path, method: :delete %>
+    <%= button_to "Cancel Attendance", event_attendances_path(@event.id), method: :delete %>
 <% end %>

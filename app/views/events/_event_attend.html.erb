@@ -5,5 +5,5 @@
 <% elsif event.is_private? %>
     <p>This event is private.</p>
 <% elsif event.attendable? %>
-    <%= link_to "Attend this Event", attend_path %>
+    <%= button_to "Attend this Event", event_attendances_path(event.id) %>
 <% end %>
