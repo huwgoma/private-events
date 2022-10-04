@@ -1,10 +1,12 @@
 <h1><%= @event.name %></h1>
 
+<!-- Edit or Delete Event -->
 <% if current_user == @event.host %>
     <%= link_to "Edit", edit_event_path %>
     <%= button_to "Delete", event_path, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete %>
 <% end %>
 
+<!-- Event Details -->
 <p>Created by <%= @event.host.name %></p>
 <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
 <p>Location: <%= @event.location %></p>
@@ -12,17 +14,21 @@
     <p>Description: <%= @event.description %></p>
 <% end %>
 
-<%= render "event_attend", event: @event, invite: @invite %>
+<!-- Event Attend/Invite -->
+<%= render "attend", event: @event, invite: @invite %>
 
+<!-- Manage Invites (Create/Revoke) -->
 <%= link_to "Manage Invites", event_invites_path(@event) if current_user == @event.host %>
 
+<!-- List of Attendees -->
 <p>Attending this Event:</p>
 <ul>
     <% @event.attendees.each do |user| %>
-        <li><%= link_to user.name, user %></li>
+        <li><%= user.name %></li>
     <% end %>
 </ul>
 
+<!-- Cancel Attendance -->
 <% if @event.attendees.include?(current_user) %>
     <%= button_to "Cancel Attendance", event_attendances_path(@event.id), method: :delete %>
 <% end %>
