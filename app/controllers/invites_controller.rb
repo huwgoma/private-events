@@ -9,9 +9,14 @@ class InvitesController < ApplicationController
   
   def accept
     invite = Invite.find(params[:id])
-    AttendancesCreator.call(attendee_id: current_user.id, event_id: invite.event_id)
+    attendance = AttendancesCreator.call(attendee_id: current_user.id, event_id: invite.event_id)
     InvitesDestroyer.call(params[:id])
-    flash[:notice] = "You are now attending this event."
+    
+    if attendance.success?
+      flash[:notice] = "You are now attending this event."
+    else
+      flash[:alert] = attendance.errors.messages.values.flatten.first
+    end 
     redirect_back(fallback_location: invites_path)
   end
 
