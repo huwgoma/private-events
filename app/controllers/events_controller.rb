@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :authenticate_host_ownership, only: [:edit, :update, :destroy]
+  before_action -> { authenticate_event_host(params[:id]) }, only: [:edit, :update, :destroy]
   
   def index
     @events = Event.all
@@ -50,12 +50,5 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit([:name, :datetime_of, :location, :is_private, :description])
-  end
-
-  def authenticate_host_ownership
-    current_user.hosted_events.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "You do not have permission to #{action_name} this event!"
-    redirect_to event_path
   end
 end

@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_host_ownership, only: [:manage, :create, :revoke]
+  before_action -> { authenticate_event_host(params[:event_id]) }, only: [:manage, :create, :revoke]
 
   # Invitee Actions - Permit only if the current user is logged in
   def index
@@ -60,12 +60,5 @@ class InvitesController < ApplicationController
 
   def invite_params
     params.require(:invite).permit(user_ids:[]).merge(inviter_id: current_user.id, event_id: params[:event_id])
-  end
-
-  def authenticate_host_ownership
-    current_user.hosted_events.find(params[:event_id])
-  rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "You do not have permission to #{action_name} invites for this event!"
-    redirect_to event_path(params[:event_id])
   end
 end

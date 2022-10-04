@@ -12,4 +12,11 @@ class ApplicationController < ActionController::Base
   def convert_time_zone(&block)
     Time.use_zone(current_user.time_zone, &block)
   end
+
+  def authenticate_event_host(event_id)
+    current_user.hosted_events.find(event_id)
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "You do not have permission to #{action_name} this event!"
+    redirect_to event_path(event_id)
+  end
 end
