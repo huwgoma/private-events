@@ -5,8 +5,10 @@
 @layer base {
   :root {
     --light-gray: #4B5563; /* gray-600 */
+    --gray: #374151; /* gray-700 */
     --dark-gray: #1F2937; /* gray-800 */
     --white: #ffffff; 
+    --black: #000000;
   }
   html, body {
     @apply h-full m-0

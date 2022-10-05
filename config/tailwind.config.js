@@ -15,8 +15,10 @@ module.exports = {
     },
     colors: {
       'light-gray': 'var(--light-gray)',
+      'gray': 'var(--gray)',
       'dark-gray': 'var(--dark-gray)',
-      'white': 'var(--white)'
+      'white': 'var(--white)',
+      'black': 'var(--black)'
     }
   },
   plugins: [

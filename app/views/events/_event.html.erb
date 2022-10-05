@@ -1,6 +1,7 @@
-<li class="flex flex-col border border-gray-600">
+<li class="flex flex-col border rounded p-4 pt-2 bg-gray">
     <h3><%= event.name %></h3>
-    <p><%= event.date_of %></p>
-    <p><%= event.description %></p>
-    <%= link_to "Event Details", event %>
+    <p class="text-xs border-b pb-2"><%= event.date_of %></p>
+    <p class="py-2 flex-grow"><%= event.description.truncate(150, separator: ' ') %></p>
+    <%= link_to "Event Details", event, 
+        class: "border rounded text-center py-1 hover:bg-white hover:text-black" %>
 </li>
