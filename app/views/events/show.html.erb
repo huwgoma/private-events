@@ -2,8 +2,11 @@
 
 <!-- Edit or Delete Event -->
 <% if current_user == @event.host %>
-    <%= link_to "Edit", edit_event_path %>
-    <%= button_to "Delete", event_path, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete %>
+    <div class="flex">
+        <%= link_to "Edit", edit_event_path, class: "btn btn-blue" %>
+        <%= button_to "Delete", event_path, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete,
+            class: "btn btn-red" %>
+    </div>
 <% end %>
 
 <!-- Event Details -->

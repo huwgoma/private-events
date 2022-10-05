@@ -9,6 +9,10 @@
     --dark-gray: #1F2937; /* gray-800 */
     --white: #ffffff; 
     --black: #000000;
+    --red: #DC2626; /* red-600 */
+    --dark-red: #991B1B; /* red-800 */
+
+    --blue: #3B82F6; /* blue-500 */
   }
   html, body {
     @apply h-full m-0
@@ -46,6 +50,25 @@
 
   .container {
     @apply mx-auto px-16;
+  }
+
+  /* Buttons (/Links) */
+  .btn {
+    @apply border rounded cursor-pointer px-4 py-1 font-semibold
+      text-white border-white
+      ease-linear transition-all duration-150;
+  }
+  .btn-gray {
+    @apply bg-dark-gray 
+      hover:bg-white hover:text-dark-gray
+  }
+  .btn-red {
+    @apply bg-red
+      hover:bg-dark-red 
+  }
+  .btn-blue {
+    @apply bg-blue 
+      hover:bg-white hover:text-blue
   }
 }
 

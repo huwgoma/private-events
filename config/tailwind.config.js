@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   content: [
@@ -18,7 +19,10 @@ module.exports = {
       'gray': 'var(--gray)',
       'dark-gray': 'var(--dark-gray)',
       'white': 'var(--white)',
-      'black': 'var(--black)'
+      'black': 'var(--black)',
+      'dark-red': 'var(--dark-red)',
+      'red': 'var(--red)',
+      'blue': 'var(--blue)'
     }
   },
   plugins: [
