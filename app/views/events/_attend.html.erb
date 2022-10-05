@@ -1,9 +1,13 @@
 <!-- If EventsController is able to find an invite to this event for the current user-->
 <% if invite %>
-    <p><%= "#{invite.inviter.name} has invited you to this event!" %></p>
-    <%= render "invites/accept_decline", invite: invite %>
+    <div class="flex justify-end">
+        <div class="box-gray flex flex-col items-end p-2 w-fit">
+            <p><%= "#{invite.inviter.name} has invited you to this event!" %></p>
+            <%= render "invites/accept_decline", invite: invite %>
+        </div>
+    </div>
 <% elsif event.is_private? %>
-    <p>This event is private.</p>
+    <p class="box-gray p-2 text-left">This event is private.</p>
 <% elsif event.attendable? %>
-    <%= button_to "Attend this Event", event_attendances_path(event.id) %>
+    <%= button_to "Attend this Event", event_attendances_path(event.id), class: "btn btn-blue" %>
 <% end %>

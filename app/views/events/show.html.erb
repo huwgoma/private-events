@@ -13,25 +13,31 @@
 </div>
 
 <!-- Event Details -->
-<div class="border rounded flex flex-col sm:flex-row bg-light-gray p-4">
+<div class="box-gray flex flex-col sm:flex-row p-4">
     <p class="flex-grow"><%= @event.description %></p>
-    <div class="mt-5 sm:mt-0">
+    <div class="">
         <p>Created by <%= @event.host.name %></p>
         <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
         <p>Location: <%= @event.location %></p>
     </div>
 </div>
 
-<!-- Event Attend/Invite -->
-<%= render "attend", event: @event, invite: @invite %>
+<!-- Event Attendance -->
+<div class="mt-5 text-right">
+    <%= render "attend", event: @event, invite: @invite %>
+</div>
 
 <!-- List of Attendees -->
 <h2><%= @event.attendees.count %> Attending this Event:</h2>
-<ul class="border rounded bg-light-gray p-2">
+<ul class="box-gray p-2">
+    <% if @event.attendees.empty? %>
+        <p>This event has no attendees yet.</p>
+    <% end %>
     <% @event.attendees.each do |user| %>
-        <li class=""><%= user.name %></li>
+        <li><%= user.name %></li>
     <% end %>
 </ul>
+
 
 <!-- Cancel Attendance -->
 <% if @event.attendees.include?(current_user) %>

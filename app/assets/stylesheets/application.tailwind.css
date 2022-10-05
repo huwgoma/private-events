@@ -36,6 +36,10 @@
 }
 
 @layer components {
+  .container {
+    @apply mx-auto px-5 sm:px-10 md:px-[10%];
+  }
+
   /* Navbar */
   .navbar {
     @apply bg-light-gray text-lg font-medium p-2 
@@ -47,15 +51,16 @@
   .navbar li {
     @apply pl-3;
   }
-
   /* Hamburger Menu - When the hamburger is checked, display hamburger items as a block (if screen is below SM) */
   .navbar input:checked ~ .hamburger-items {
     @apply block sm:flex;
   }
 
-  .container {
-    @apply mx-auto px-5 sm:px-10 md:px-[10%];
+  /* Border + Background (Box) */
+  .box-gray {
+    @apply border rounded bg-gray;
   }
+
 
   /* Buttons (/Links) */
   .btn {

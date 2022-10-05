@@ -1,2 +1,4 @@
-<%= button_to "Accept", accept_invite_path(invite) %>
-<%= button_to "Decline", decline_invite_path(invite) %>
+<div class="flex gap-1.5">
+    <%= button_to "Accept", accept_invite_path(invite), class:"btn btn-blue" %>
+    <%= button_to "Decline", decline_invite_path(invite), class:"btn btn-red" %>
+</div>
