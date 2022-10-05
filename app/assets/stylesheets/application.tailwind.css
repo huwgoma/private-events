@@ -19,7 +19,7 @@
   }
 
   h1 {
-    @apply text-3xl font-semibold;
+    @apply text-3xl font-semibold py-5;
   }
 
   h2 {
@@ -30,7 +30,7 @@
     @apply text-xl font-semibold;
   }
 
-  h1, h2, h3 {
+  h2, h3 {
     @apply py-2;
   }
 }
@@ -59,7 +59,7 @@
       ease-linear transition-all duration-150;
   }
   .btn-gray {
-    @apply bg-dark-gray 
+    @apply bg-light-gray 
       hover:bg-white hover:text-dark-gray
   }
   .btn-red {

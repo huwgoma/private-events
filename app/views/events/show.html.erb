@@ -1,37 +1,42 @@
-<h1><%= @event.name %></h1>
+<div class="flex justify-between items-end">
+    <h1><%= @event.name %></h1>
 
-<!-- Edit or Delete Event -->
-<% if current_user == @event.host %>
-    <div class="flex">
-        <%= link_to "Edit", edit_event_path, class: "btn btn-blue" %>
-        <%= button_to "Delete", event_path, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete,
-            class: "btn btn-red" %>
-    </div>
-<% end %>
+    <!-- Edit/Delete Event; Manage Invites (Create/Revoke) -->
+    <% if current_user == @event.host %>
+        <div class="flex pb-5 gap-x-2.5">
+            <%= link_to "Manage Invites", event_invites_path(@event), class:"btn btn-gray" %>
+            <%= link_to "Edit Event", edit_event_path, class: "btn btn-blue" %>
+            <%= button_to "Delete Event", event_path, form: { data: { turbo_confirm: "Are you sure you want to delete this event?" } }, method: :delete,
+                class: "btn btn-red" %>
+        </div>
+    <% end %>
+</div>
 
 <!-- Event Details -->
-<p>Created by <%= @event.host.name %></p>
-<p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
-<p>Location: <%= @event.location %></p>
-<% if @event.description.present? %>
-    <p>Description: <%= @event.description %></p>
-<% end %>
+<div class="border rounded flex bg-light-gray p-4">
+    <p class="flex-grow"><%= @event.description %></p>
+    <div>
+        <p>Created by <%= @event.host.name %></p>
+        <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
+        <p>Location: <%= @event.location %></p>
+    </div>
+</div>
 
 <!-- Event Attend/Invite -->
 <%= render "attend", event: @event, invite: @invite %>
 
-<!-- Manage Invites (Create/Revoke) -->
-<%= link_to "Manage Invites", event_invites_path(@event) if current_user == @event.host %>
-
 <!-- List of Attendees -->
-<p>Attending this Event:</p>
-<ul>
+<h2><%= @event.attendees.count %> Attending this Event:</h2>
+<ul class="border rounded bg-light-gray p-2">
     <% @event.attendees.each do |user| %>
-        <li><%= user.name %></li>
+        <li class=""><%= user.name %></li>
     <% end %>
 </ul>
 
 <!-- Cancel Attendance -->
 <% if @event.attendees.include?(current_user) %>
-    <%= button_to "Cancel Attendance", event_attendances_path(@event.id), method: :delete %>
+    <div class="text-right">
+        <%= button_to "Cancel Attendance", event_attendances_path(@event.id), method: :delete,
+            class: "btn btn-red mt-4" %>
+    </div>
 <% end %>
