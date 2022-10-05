@@ -48,6 +48,32 @@
     @apply pl-3;
   }
 
+
+  /* Navbar - Hamburger Menu */
+  /* .hamburger-items a {
+    @apply block;
+  }
+
+  .navbar label {
+    @apply inline-block;
+  }
+
+  .hamburger-items {
+    @apply hidden w-full;
+  }
+
+  .navbar input[type="checkbox"] {
+    @apply hidden;
+  } */
+  
+  .navbar input:checked ~ .hamburger-items {
+    @apply block;
+  }
+
+
+
+
+
   .container {
     @apply mx-auto px-16;
   }

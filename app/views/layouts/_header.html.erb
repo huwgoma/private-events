@@ -1,16 +1,25 @@
 <nav class="navbar">
     <div class="container flex justify-between">
         <%= link_to "Home", root_path %>
-        <ul class="flex">
-            <% if user_signed_in? %>
-                <li><%= link_to "My Events", current_user %></li>
-                <li><%= link_to "My Invites (#{current_user.received_invites.count})", invites_path %></li>
-                <li><%= link_to current_user.name, edit_user_registration_path %></li>
-                <li><%= button_to "Log Out", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-                <li><%= link_to "Log In", new_user_session_path %></li>
-                <li><%= link_to "Sign Up", new_user_registration_path %></li>
-            <% end %>
-        </ul>
+
+        <!--Hamburger Menu -->
+        <div class="text-right">
+            <!--Hamburger Icon -->
+            <%= label_tag :hamburger, "☰", class:"sm:hidden text-2xl cursor-pointer" %>
+            <%= check_box_tag :hamburger, 'checked', false, class:"hidden" %>
+
+            <!--Hamburger Items-->
+            <ul class="hamburger-items hidden">
+                <% if user_signed_in? %>
+                    <li><%= link_to "My Events", current_user %></li>
+                    <li><%= link_to "My Invites (#{current_user.received_invites.count})", invites_path %></li>
+                    <li><%= link_to current_user.name, edit_user_registration_path %></li>
+                    <li><%= button_to "Log Out", destroy_user_session_path, method: :delete %></li>
+                <% else %>
+                    <li><%= link_to "Log In", new_user_session_path %></li>
+                    <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                <% end %>
+            </ul>
+        </div>
     </div>
 </nav>
