@@ -48,26 +48,9 @@
     @apply pl-3;
   }
 
-
-  /* Navbar - Hamburger Menu */
-  /* .hamburger-items a {
-    @apply block;
-  }
-
-  .navbar label {
-    @apply inline-block;
-  }
-
-  .hamburger-items {
-    @apply hidden w-full;
-  }
-
-  .navbar input[type="checkbox"] {
-    @apply hidden;
-  } */
-  
+  /* Hamburger Menu - When the hamburger is checked, display hamburger items as a block (if screen is below SM) */
   .navbar input:checked ~ .hamburger-items {
-    @apply block;
+    @apply block sm:flex;
   }
 
 

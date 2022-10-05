@@ -9,7 +9,7 @@
             <%= check_box_tag :hamburger, 'checked', false, class:"hidden" %>
 
             <!--Hamburger Items-->
-            <ul class="hamburger-items hidden">
+            <ul class="hamburger-items hidden sm:flex">
                 <% if user_signed_in? %>
                     <li><%= link_to "My Events", current_user %></li>
                     <li><%= link_to "My Invites (#{current_user.received_invites.count})", invites_path %></li>
