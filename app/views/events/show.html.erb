@@ -1,5 +1,5 @@
-<div class="flex justify-between items-end">
-    <h1><%= @event.name %></h1>
+<div class="flex flex-col sm:flex-row justify-between items-end">
+    <h1 class="self-start"><%= @event.name %></h1>
 
     <!-- Edit/Delete Event; Manage Invites (Create/Revoke) -->
     <% if current_user == @event.host %>
@@ -13,9 +13,9 @@
 </div>
 
 <!-- Event Details -->
-<div class="border rounded flex bg-light-gray p-4">
+<div class="border rounded flex flex-col sm:flex-row bg-light-gray p-4">
     <p class="flex-grow"><%= @event.description %></p>
-    <div>
+    <div class="mt-5 sm:mt-0">
         <p>Created by <%= @event.host.name %></p>
         <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
         <p>Location: <%= @event.location %></p>
