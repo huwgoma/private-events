@@ -8,6 +8,7 @@
     --gray: #374151; /* gray-700 */
     --dark-gray: #1F2937; /* gray-800 */
     --white: #ffffff; 
+    --off-white: #E5E7EB;
     --black: #000000;
     --red: #DC2626; /* red-600 */
     --dark-red: #991B1B; /* red-800 */
@@ -23,15 +24,11 @@
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply text-2xl font-semibold py-2;
   }
 
   h3 { 
-    @apply text-xl font-semibold;
-  }
-
-  h2, h3 {
-    @apply py-2;
+    @apply text-xl font-semibold py-2;
   }
 }
 
@@ -61,7 +58,6 @@
     @apply border rounded bg-gray;
   }
 
-
   /* Buttons (/Links) */
   .btn {
     @apply border rounded cursor-pointer px-4 py-1 font-semibold text-sm
@@ -80,5 +76,19 @@
     @apply bg-blue 
       hover:bg-white hover:text-blue
   }
+
+  /* Forms */
+  input[type="text"],
+  input[type="datetime-local"],
+  textarea {
+    @apply text-black bg-off-white;
+  }
+}
+/* Form Errors - Must be included outside of layers to be unconditionally included */
+.field_with_errors {
+  
+}
+.field_with_errors > input {
+  @apply border-2 border-red;
 }
 

@@ -12,7 +12,10 @@ module PrivateEvents
     config.load_defaults 7.0
 
     # Configuration for the application, engines, and railties goes here.
-    #
+    
+    # field_with_errors removal
+    # config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+    
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #

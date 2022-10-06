@@ -1,8 +1,10 @@
 <% unless event.errors.empty? %>
-    <h2><%= "#{pluralize(event.errors.count, 'Error')}:"%></h2>
-    <ul>
-        <% event.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-        <% end %>
-    </ul>
+    <div class="box-gray border-2 border-red pl-2 pb-2">
+        <h2><%= "#{pluralize(event.errors.count, 'Error')}:"%></h2>
+        <ul class="list-disc ml-5">
+            <% event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
 <% end %>

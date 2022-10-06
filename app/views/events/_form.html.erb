@@ -1,28 +1,29 @@
 <%= form_with model: event do |f| %>
-    <div>
-        <%= f.label :name, "Event Name:" %>
-        <%= f.text_field :name %>
-    </div>
+    <div class="box-gray p-2">
+        <div class="flex flex-col w-1/2">
+            <%= f.label :name, "Event Name:", class:"" %>
+            <%= f.text_field :name, class:"w-full" %>
+        </div>
 
-    <div>
-        <%= f.label :datetime_of, "Event Date/Time:" %>
-        <%= f.datetime_field :datetime_of, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P") %>
-    </div>
-
-    <div>
-        <%= f.label :location, "Event Location:" %>
-        <%= f.text_field :location %>
-    </div>
-
-    <div>
-        <%= f.check_box :is_private %>
-        <%= f.label :is_private, "Make this event private?" %>
-    </div>
-
-    <div>
-        <%= f.label :description, "Description:" %>
-        <%= f.text_area :description, size: "50x10" %>
-    </div>
+        <div class="flex flex-col w-1/2">
+            <%= f.label :datetime_of, "Event Date/Time:", class:"" %>
+            <%= f.datetime_field :datetime_of, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P"), class:"w-full" %>
+        </div>
+        
+        <div class="flex flex-col w-1/2">
+            <%= f.label :location, "Event Location:", class:"" %>
+            <%= f.text_field :location, class:"w-full" %>
+        </div>
     
-    <div><%= f.submit %></div>
+        <div class="flex">
+            <%= f.label :is_private, "Make this event private:" %>
+            <%= f.check_box :is_private, class:"" %>
+        </div>
+        <div class="flex flex-col">
+            <%= f.label :description, "Description:", class:"" %>
+            <%= f.text_area :description, class:"" %>
+        </div>
+
+        <div><%= f.submit %></div>
+    </div>
 <% end %>
