@@ -13,9 +13,9 @@
 </div>
 
 <!-- Event Details -->
-<div class="box-gray flex flex-col sm:flex-row p-4">
+<div class="box-gray flex flex-col sm:flex-row gap-8 p-4">
     <p class="flex-grow"><%= @event.description %></p>
-    <div class="">
+    <div class="whitespace-nowrap">
         <p>Created by <%= @event.host.name %></p>
         <p>Date/Time: <%= "#{@event.date_of} at #{@event.time_of}" %></p>
         <p>Location: <%= @event.location %></p>
