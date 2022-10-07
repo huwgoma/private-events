@@ -16,10 +16,10 @@
 
     <div class="container pb-10">
       <% if notice %>
-        <div><%= notice %></div>
+        <div class="bg-green my-2 p-2 rounded text-black"><%= notice %></div>
       <% end %>
       <% if alert %>
-        <div><%= alert %></div>
+        <div class="bg-light-red my-2 p-2 rounded text-black"><%= alert %></div>
       <% end %>
 
       <%= yield %>

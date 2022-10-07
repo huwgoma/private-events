@@ -21,8 +21,10 @@ module.exports = {
       'white': 'var(--white)',
       'off-white': 'var(--off-white)',
       'black': 'var(--black)',
+      'light-red': 'var(--light-red)',
       'dark-red': 'var(--dark-red)',
       'red': 'var(--red)',
+      'green': 'var(--green)',
       'blue': 'var(--blue)'
     }
   },
