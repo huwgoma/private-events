@@ -1,7 +1,7 @@
 <% if flash[:failed_invites] %>
-    <ul>
+    <ul class="box-gray border-2 border-red pl-2 pb-2">
         <% flash[:failed_invites].each do |name| %>
-            <li><%= name %></li>
+            <li class="list-disc ml-5"><%= name %></li>
         <% end %>
     </ul>
 <% end %>

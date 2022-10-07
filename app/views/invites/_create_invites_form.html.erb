@@ -1,9 +1,17 @@
-<%= form_with model: invite, url: event_invites_path do |f| %>
-    <%= f.collection_check_boxes(:user_ids, invitable_users, :id, :name) do |b| %>
-        <li>
-            <%= b.check_box %>
-            <%= b.label %>
-        </li>
+<div class="box-gray w-1/2 min-w-fit p-4">
+    <% if invitable_users.empty? %>
+        <p>There aren't any invitable users at this time!</p>
+    <% else %>
+        <%= form_with model: invite, url: event_invites_path do |f| %>
+            <ul class="text-lg">
+                <%= f.collection_check_boxes(:user_ids, invitable_users, :id, :name) do |b| %>
+                    <li>
+                        <%= b.check_box %>
+                        <%= b.label %>
+                    </li>
+                <% end %>
+            </ul>
+            <%= f.submit "Invite Users", class:"btn btn-blue mt-5" %>
+        <% end %> 
     <% end %>
-    <%= f.submit "Invite Users" %>
-<% end %>
+</div>
