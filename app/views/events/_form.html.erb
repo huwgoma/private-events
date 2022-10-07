@@ -1,29 +1,31 @@
 <%= form_with model: event do |f| %>
-    <div class="box-gray p-2">
-        <div class="flex flex-col w-1/2">
-            <%= f.label :name, "Event Name:", class:"" %>
+    <div class="box-gray p-2 flex flex-col gap-2">
+        <div class="flex flex-col">
+            <%= f.label :name, "Event Name: *", class:"" %>
             <%= f.text_field :name, class:"w-full" %>
         </div>
 
-        <div class="flex flex-col w-1/2">
-            <%= f.label :datetime_of, "Event Date/Time:", class:"" %>
+        <div class="flex flex-col">
+            <%= f.label :datetime_of, "Event Date/Time: *", class:"" %>
             <%= f.datetime_field :datetime_of, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P"), class:"w-full" %>
         </div>
         
-        <div class="flex flex-col w-1/2">
-            <%= f.label :location, "Event Location:", class:"" %>
+        <div class="flex flex-col">
+            <%= f.label :location, "Event Location: *", class:"" %>
             <%= f.text_field :location, class:"w-full" %>
         </div>
     
-        <div class="flex">
+        <div class="flex items-center gap-2">
             <%= f.label :is_private, "Make this event private:" %>
             <%= f.check_box :is_private, class:"" %>
         </div>
         <div class="flex flex-col">
             <%= f.label :description, "Description:", class:"" %>
-            <%= f.text_area :description, class:"" %>
+            <%= f.text_area :description, size: "30x5", placeholder:"Describe your event!", class:"" %>
         </div>
 
-        <div><%= f.submit %></div>
+        <div class="flex justify-end mt-5">
+            <%= f.submit class:"btn btn-blue" %>
+        </div>
     </div>
 <% end %>

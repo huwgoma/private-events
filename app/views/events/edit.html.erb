@@ -1,5 +1,8 @@
 <h1>Edit this Event:</h1>
+<p>Required fields are marked with <abbr title="required">*:</abbr></p>
 
-<%= render "errors", event: @event %>
-
-<%= render "form", event: @event %>
+<div class="w-1/2 min-w-fit">
+    <%= render "errors", event: @event %>
+    
+    <%= render "form", event: @event %>
+</div>

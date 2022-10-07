@@ -81,13 +81,15 @@
   input[type="text"],
   input[type="datetime-local"],
   textarea {
-    @apply text-black bg-off-white;
+    @apply text-black bg-off-white border rounded text-sm;
+  }
+
+  input:focus,
+  textarea:focus {
+    @apply outline-none border-2 border-blue;
   }
 }
 /* Form Errors - Must be included outside of layers to be unconditionally included */
-.field_with_errors {
-  
-}
 .field_with_errors > input {
   @apply border-2 border-red;
 }
