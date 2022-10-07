@@ -1,5 +1,5 @@
 <% if @received_invites.any? %>
-    <h1>View your Invites:</h1>
+    <h1>You have <%= pluralize(@received_invites.count, "Invite") %>:</h1>
     <%= render "received_invites", received_invites: @received_invites %>
 <% else %>
     <h1>You don't have any invites right now!</h1>

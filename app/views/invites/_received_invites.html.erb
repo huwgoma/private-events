@@ -1,6 +1,6 @@
 <ul>
     <% @received_invites.each do |invite| %>
-        <li>
+        <li class="box-gray w-fit p-2 mb-4">
             <%= invite.event.name %>
             <%= "from #{invite.inviter.name}" %>
             <br>
