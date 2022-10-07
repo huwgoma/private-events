@@ -15,6 +15,7 @@
     --dark-red: #991B1B; /* red-800 */
     --green: #6EE7B7; /* green-300 */
     --blue: #3B82F6; /* blue-500 */
+    --yellow: #F59E0B; /* yellow 600 */
   }
   html, body {
     @apply h-full m-0

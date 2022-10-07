@@ -25,7 +25,8 @@ module.exports = {
       'dark-red': 'var(--dark-red)',
       'red': 'var(--red)',
       'green': 'var(--green)',
-      'blue': 'var(--blue)'
+      'blue': 'var(--blue)',
+      'yellow': 'var(--yellow)'
     }
   },
   plugins: [
