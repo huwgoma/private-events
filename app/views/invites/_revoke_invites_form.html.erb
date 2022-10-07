@@ -1,9 +1,17 @@
-<%= form_with url: event_invites_path, method: :delete do |f| %>
-    <%= f.collection_check_boxes(:invite_ids, @invites, :id, Proc.new {|i| i.invitee.name }) do |b| %>
-        <li>
-            <%= b.check_box %>
-            <%= b.label %>
-        </li>
+<div class="box-gray w-1/2 min-w-fit p-4">
+    <% if invites.empty? %>
+        <p>There are no pending invitations for this event.</p>
+    <% else %>
+        <%= form_with url: event_invites_path, method: :delete do |f| %>
+            <ul class="text-lg">
+                <%= f.collection_check_boxes(:invite_ids, invites, :id, Proc.new {|i| i.invitee.name }) do |b| %>
+                    <li>
+                        <%= b.check_box %>
+                        <%= b.label %>
+                    </li>
+                <% end %>
+            </ul>
+            <%= f.submit "Revoke Invites", class:"btn btn-red mt-5" %>
+        <% end %>
     <% end %>
-    <%= f.submit "Revoke Invites" %>
-<% end %>
+</div>
