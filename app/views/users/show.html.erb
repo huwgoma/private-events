@@ -1,40 +1,44 @@
 <h1><%= @user.name %></h1>
 
-<div class="box-gray p-2 grid grid-cols-2 gap-y-5">
-    <div>
-        <h2>Upcoming Hosted Events:</h2>
-        <ul class="text-lg">
-            <% @user.hosted_events.future.each do |event| %>
-                <%= render "event_link", event: event %>
-            <% end %>
-        </ul>
+<div class="box-gray p-2 grid grid-cols-1 sm:grid-cols-2">
+    <div class="col-span-2 sm:grid grid-cols-2">
+        <div class="col-start-1 col-end-2">
+            <h2>Upcoming Hosted Events:</h2>
+            <ul class="text-lg list-disc pl-5">
+                <% @user.hosted_events.future.each do |event| %>
+                    <%= render "event_link", event: event %>
+                <% end %>
+            </ul>
+        </div>
+        
+        <div class="col-start-2 col-end-3">
+            <h2>Upcoming Attending Events:</h2>
+            <ul class="text-lg list-disc pl-5">
+                <% @user.attending_events.future.each do |event| %>
+                    <%= render "event_link", event: event %>
+                <% end %>
+            </ul>
+        </div>
     </div>
     
-    <div>
-        <h2>Upcoming Attending Events:</h2>
-        <ul class="text-lg">
-            <% @user.attending_events.future.each do |event| %>
-                <%= render "event_link", event: event %>
-            <% end %>
-        </ul>
-    </div>
-    
-    <div class="border-t">
-        <h3>Past Hosted Events:</h3>
-        <ul>
-            <% @user.hosted_events.past.each do |event| %>
-                <%= render "event_link", event: event %>
-            <% end %>
-        </ul>
-    </div>
-    
-    <div class="border-t">
-        <h3>Past Events Attended:</h3>
-        <ul>
-            <% @user.attending_events.past.each do |event| %>
-                <%= render "event_link", event: event %>
-            <% end %>
-        </ul>
+    <div class="col-span-2 sm:grid grid-cols-2 border-t">
+        <div class="col-start-1 col-end-2">
+            <h2>Past Hosted Events:</h2>
+            <ul class="list-disc pl-5">
+                <% @user.hosted_events.past.each do |event| %>
+                    <%= render "event_link", event: event %>
+                <% end %>
+            </ul>
+        </div>
+        
+        <div class="col-start-2 col-end-3">
+            <h2>Past Events Attended:</h2>
+            <ul class="list-disc pl-5">
+                <% @user.attending_events.past.each do |event| %>
+                    <%= render "event_link", event: event %>
+                <% end %>
+            </ul>
+        </div>
     </div>
 </div>
 
