@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_10_03_152459) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "attendances", force: :cascade do |t|
-    t.integer "attendee_id"
-    t.integer "event_id"
+    t.bigint "attendee_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attendee_id"], name: "index_attendances_on_attendee_id"
@@ -23,19 +26,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_03_152459) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.datetime "datetime"
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "host_id"
+    t.bigint "host_id"
     t.datetime "datetime_of"
     t.boolean "is_private", default: false
     t.index ["host_id"], name: "index_events_on_host_id"
   end
 
   create_table "invites", force: :cascade do |t|
-    t.integer "inviter_id"
-    t.integer "invitee_id"
-    t.integer "event_id"
+    t.bigint "inviter_id"
+    t.bigint "invitee_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_invites_on_event_id"
