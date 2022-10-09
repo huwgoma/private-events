@@ -1,7 +1,7 @@
 databases:
-  - name: private-events
-    databaseName: private-events
-    user: private-events
+  - name: private_events
+    databaseName: private_events
+    user: private_events
     plan: free
 
 services:
