@@ -7,7 +7,7 @@
 
         <div class="flex flex-col">
             <%= f.label :datetime_of, "Event Date/Time: *", class:"" %>
-            <%= f.datetime_field :datetime_of, min: DateTime.now.strftime("%Y-%m-%d, %I:%M %P"), class:"w-full" %>
+            <%= f.datetime_field :datetime_of, min: DateTime.now.in_time_zone.strftime("%Y-%m-%d, %I:%M %P"), class:"w-full" %>
         </div>
         
         <div class="flex flex-col">
