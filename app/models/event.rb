@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   include Attendable
 
   validates :name, :datetime_of, :location, presence: true 
-  validates :datetime_of, comparison: { greater_than: DateTime.now, message: "must be in the future!" }
+  validates :datetime_of, comparison: { greater_than: DateTime.current, message: "must be in the future!" }
   
   belongs_to :host, class_name: "User"
   has_many :attendances, dependent: :destroy

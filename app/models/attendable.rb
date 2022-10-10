@@ -8,7 +8,7 @@ module Attendable
   end
 
   def upcoming?
-    DateTime.now.before?(datetime_of)
+    DateTime.current.before?(datetime_of)
   end
 
   def user_not_attending?
