@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   
   belongs_to :host, class_name: "User"
   has_many :attendances, dependent: :destroy
-  has_many :attendees, through: :attendances, source: :attendee
+  has_many :attendees, through: :attendances
 
   has_many :invites, dependent: :destroy
   has_many :invitees, through: :invites
