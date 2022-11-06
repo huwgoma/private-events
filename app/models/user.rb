@@ -19,6 +19,7 @@ class User < ApplicationRecord
   # end
 
   def self.invitable_to(event)
+    return User.none unless event.upcoming?
     User.where.not(id: [event.host_id, event.attendee_ids, event.invitee_ids].flatten)
   end
 end
