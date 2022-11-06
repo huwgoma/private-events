@@ -22,8 +22,10 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @event.current_user = current_user
-    @invite = @event.invites.find_by(invitee_id: current_user.id)
+    if current_user
+      @event.current_user = current_user 
+      @invite = @event.invites.find_by(invitee_id: current_user.id) 
+    end
   end
 
   def edit
