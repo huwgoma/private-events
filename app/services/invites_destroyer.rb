@@ -1,7 +1,6 @@
 class InvitesDestroyer
   def initialize(invite_ids)
-    # If given an Array - Strip the blank values; otherwise, just take the value as-is
-    @invite_ids = invite_ids.respond_to?(:reject) ? invite_ids.reject(&:blank?) : invite_ids
+    @invite_ids = invite_ids
   end
 
   def self.call(*args, &block)
